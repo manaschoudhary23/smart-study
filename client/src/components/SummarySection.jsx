@@ -10,6 +10,8 @@ function SummarySection({ text }) {
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('summary');
 
+  const API_BASE_URL = 'https://smart-study-2.onrender.com';
+
   const generateSummary = async () => {
     if (!text) {
       setError('Please upload or paste text first');
@@ -20,7 +22,7 @@ function SummarySection({ text }) {
     setError('');
 
     try {
-      const response = await axios.post('/api/pdf/summarize', { text });
+      const response = await axios.post(`${API_BASE_URL}/api/pdf/summarize`, { text });
       if (response.data.success) {
         setSummary(response.data.summary);
         setActiveTab('summary');
@@ -42,7 +44,7 @@ function SummarySection({ text }) {
     setError('');
 
     try {
-      const response = await axios.post('/api/pdf/explain', { text });
+      const response = await axios.post(`${API_BASE_URL}/api/pdf/explain`, { text });
       if (response.data.success) {
         setExplanation(response.data.explanation);
         setActiveTab('explanation');
@@ -54,9 +56,7 @@ function SummarySection({ text }) {
     }
   };
 
-  if (!text) {
-    return null;
-  }
+  if (!text) return null;
 
   return (
     <div className="summary-section">
@@ -106,13 +106,9 @@ function SummarySection({ text }) {
         <div className="result-content">
           <div className="markdown-content" dangerouslySetInnerHTML={{ 
             __html: summary.split('\n').map(line => {
-              if (line.trim().startsWith('#')) {
-                return `<h3>${line.replace(/^#+\s*/, '')}</h3>`;
-              } else if (line.trim().startsWith('-') || line.trim().startsWith('*')) {
-                return `<li>${line.replace(/^[-*]\s*/, '')}</li>`;
-              } else if (line.trim()) {
-                return `<p>${line}</p>`;
-              }
+              if (line.trim().startsWith('#')) return `<h3>${line.replace(/^#+\s*/, '')}</h3>`;
+              if (line.trim().startsWith('-') || line.trim().startsWith('*')) return `<li>${line.replace(/^[-*]\s*/, '')}</li>`;
+              if (line.trim()) return `<p>${line}</p>`;
               return '';
             }).join('')
           }} />
@@ -123,13 +119,9 @@ function SummarySection({ text }) {
         <div className="result-content">
           <div className="markdown-content" dangerouslySetInnerHTML={{ 
             __html: explanation.split('\n').map(line => {
-              if (line.trim().startsWith('#')) {
-                return `<h3>${line.replace(/^#+\s*/, '')}</h3>`;
-              } else if (line.trim().startsWith('-') || line.trim().startsWith('*')) {
-                return `<li>${line.replace(/^[-*]\s*/, '')}</li>`;
-              } else if (line.trim()) {
-                return `<p>${line}</p>`;
-              }
+              if (line.trim().startsWith('#')) return `<h3>${line.replace(/^#+\s*/, '')}</h3>`;
+              if (line.trim().startsWith('-') || line.trim().startsWith('*')) return `<li>${line.replace(/^[-*]\s*/, '')}</li>`;
+              if (line.trim()) return `<p>${line}</p>`;
               return '';
             }).join('')
           }} />
@@ -140,4 +132,3 @@ function SummarySection({ text }) {
 }
 
 export default SummarySection;
-

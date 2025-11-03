@@ -9,6 +9,8 @@ function QuizSection({ text, onViewQuiz }) {
   const [numQuestions, setNumQuestions] = useState(5);
   const [questionType, setQuestionType] = useState('mixed');
 
+  const API_BASE_URL = 'https://smart-study-2.onrender.com';
+
   const generateQuiz = async () => {
     if (!text) {
       setError('Please upload or paste text first');
@@ -19,11 +21,10 @@ function QuizSection({ text, onViewQuiz }) {
     setError('');
 
     try {
-      const response = await axios.post('/api/quiz/generate', {
-        text,
-        numQuestions,
-        questionType
-      });
+      const response = await axios.post(
+        `${API_BASE_URL}/api/quiz/generate`, 
+        { text, numQuestions, questionType }
+      );
 
       if (response.data.success) {
         onViewQuiz(response.data.quiz);
@@ -35,9 +36,7 @@ function QuizSection({ text, onViewQuiz }) {
     }
   };
 
-  if (!text) {
-    return null;
-  }
+  if (!text) return null;
 
   return (
     <div className="quiz-section">
@@ -55,6 +54,7 @@ function QuizSection({ text, onViewQuiz }) {
             disabled={loading}
           />
         </div>
+
         <div className="option-group">
           <label htmlFor="question-type">Question Type:</label>
           <select
@@ -69,11 +69,8 @@ function QuizSection({ text, onViewQuiz }) {
           </select>
         </div>
       </div>
-      <button 
-        onClick={generateQuiz} 
-        disabled={loading}
-        className="generate-btn"
-      >
+
+      <button onClick={generateQuiz} disabled={loading} className="generate-btn">
         Generate Quiz
       </button>
 
@@ -84,4 +81,3 @@ function QuizSection({ text, onViewQuiz }) {
 }
 
 export default QuizSection;
-

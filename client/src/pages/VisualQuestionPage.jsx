@@ -50,10 +50,14 @@ function VisualQuestionPage() {
 
     try {
       console.log('Sending request to server...');
-      const response = await axios.post('/api/vision/analyze', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-        timeout: 60000,
-      });
+      const response = await axios.post(
+        'https://your-render-backend-name.onrender.com/api/vision/analyze',
+        formData,
+        {
+          headers: { 'Content-Type': 'multipart/form-data' },
+          timeout: 60000,
+        }
+      );
 
       console.log('Received response:', response.data);
 
@@ -200,4 +204,3 @@ function VisualQuestionPage() {
 }
 
 export default VisualQuestionPage;
-

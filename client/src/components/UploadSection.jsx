@@ -8,6 +8,8 @@ function UploadSection({ onTextExtracted }) {
   const [error, setError] = useState('');
   const [filename, setFilename] = useState('');
 
+  const API_BASE_URL = 'https://smart-study-2.onrender.com';
+
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -25,7 +27,7 @@ function UploadSection({ onTextExtracted }) {
     formData.append('pdf', file);
 
     try {
-      const response = await axios.post('/api/pdf/upload', formData, {
+      const response = await axios.post(`${API_BASE_URL}/api/pdf/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -51,7 +53,7 @@ function UploadSection({ onTextExtracted }) {
 
   return (
     <div className="upload-section">
-      <h2>📄 Upload Document or Paste Text</h2>
+      <h2> Upload Document or Paste Text</h2>
       <div className="upload-container">
         <div className="upload-box">
           <label htmlFor="pdf-upload" className="upload-label">
@@ -87,4 +89,3 @@ function UploadSection({ onTextExtracted }) {
 }
 
 export default UploadSection;
-
