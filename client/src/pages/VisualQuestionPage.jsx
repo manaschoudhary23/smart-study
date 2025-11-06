@@ -51,7 +51,7 @@ function VisualQuestionPage() {
     try {
       console.log('Sending request to server...');
       const response = await axios.post(
-        'https://your-render-backend-name.onrender.com/api/vision/analyze',
+        'https://smart-study-2.onrender.com/api/vision/analyze',
         formData,
         {
           headers: { 'Content-Type': 'multipart/form-data' },
