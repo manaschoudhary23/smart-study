@@ -1,21 +1,21 @@
-# Smart Study Assistant 📚
+# Smart Study Assistant 
 
 An intelligent study assistant powered by Google's Gemini AI that helps students learn effectively through text analysis, quiz generation, and visual reasoning.
 
 ## Features
 
-### 📄 Text Understanding
+###  Text Understanding
 - **PDF Upload**: Upload and extract text from PDF documents
 - **Text Summarization**: Get clear, concise summaries of your study materials
 - **Concept Explanation**: Simplified explanations with analogies and examples
 
-### 🧩 Quiz Generation
+###  Quiz Generation
 - Generate 5-20 questions from your text
 - Multiple-choice and short-answer questions
 - Customizable difficulty levels
 - Instant feedback with explanations
 
-### 🎨 Visual Reasoning
+###  Visual Reasoning
 - **Draw Tool**: Create diagrams and drawings with a canvas-based tool
 - **Image Upload**: Upload images for analysis
 - **AI-Powered Analysis**: Ask questions about images and get detailed explanations
